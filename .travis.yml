@@ -9,7 +9,6 @@ addons:
   apt:
     packages:
       - docker-ce
-  chrome: stable
 
 # Install any dependencies, update Docker Compose to 1.23.2 so we can use Dockerfile outside build context
 before_install:
@@ -20,7 +19,6 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
   - docker-compose --version
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 
   #install:
 
@@ -31,7 +29,7 @@ before_script:
 
 # Run some tests
 script:
-  - docker run lemonostif/todo-view-test npm test -- --watch=false --no-progress --browsers=Chrome
+  - docker run lemonostif/todo-view-test npm test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
   - docker run lemonostif/todo-cache-service-test npm test
 
 after_success:
